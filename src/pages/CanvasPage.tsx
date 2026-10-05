@@ -480,7 +480,7 @@ export function CanvasPage({ canvasId }: { canvasId: string }) {
             </div>
             <WorkingNow />
             <PromptBar canvasId={canvasId} />
-            <Onboarding />
+            <Onboarding canvasId={canvasId} />
             {!isMobile && (layersOpen ? <LayersPanel onAddFrame={addFrame} /> : <LayersRailToggle />)}
             {!isMobile && selectedFrame && panelElement && !deferPanel && (
               <ElementPanel
