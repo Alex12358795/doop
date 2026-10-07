@@ -6,7 +6,7 @@ import { syncEdges, syncKeys, syncLinks } from './db/schema.ts'
 import { store } from './store.ts'
 import * as actions from './actions.ts'
 import type { Frame } from '../shared/types.ts'
-import { MAX_FRAME_HTML_BYTES, perMinuteEnv } from './limits.ts'
+import { MAX_FRAME_HTML_BYTES } from './limits.ts'
 
 /**
  * Design sync: a PostHog-style snippet (public/doop-sync.js) embedded in an
@@ -145,7 +145,7 @@ export function wrapSnapshotHtml(html: string, marker: string, baseUrl: string |
 
 /* ------------------------------------------------------------------ */
 
-const INGESTS_PER_MIN = perMinuteEnv('SYNC_INGESTS_PER_MIN', 30)
+const INGESTS_PER_MIN = Number(process.env.SYNC_INGESTS_PER_MIN || 30)
 /** floor between rewrites of the SAME page — a busy app must not churn the
  *  canvas (and its websocket room) with a frame write per user interaction */
 const PAGE_MIN_INTERVAL_MS = Number(process.env.SYNC_PAGE_INTERVAL_MS ?? 30_000)

@@ -3,11 +3,10 @@ import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
 /**
- * The per-minute caps are configurable through environment variables, but the
- * parser test only covers reading a value — not that a tool actually consumes
- * it. This loads the MCP server fresh with MCP_UPLOADS_PER_MIN=2 and drives
- * real upload_asset calls, so a wrong env key or a missed call site would fail
- * here instead of quietly leaving the tool at its old default.
+ * The per-minute caps are configurable through environment variables. This
+ * loads the MCP server fresh with MCP_UPLOADS_PER_MIN=2 and drives real
+ * upload_asset calls, so a wrong env key or a missed call site would fail here
+ * instead of quietly leaving the tool at its old default.
  */
 
 vi.mock('../server/db/persist.ts', () => ({

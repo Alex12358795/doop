@@ -22,14 +22,3 @@ export const MAX_IMPORT_CSS_FETCH_BYTES = 8_000_000
 
 /** Sitemap and HTML bytes read per document while discovering a site's pages. */
 export const MAX_DISCOVERY_BYTES = 2_000_000
-
-/** Read a per-minute rate limit from the environment, keeping `fallback` when
- *  the variable is unset. Guards against a blank (`SYNC_INGESTS_PER_MIN=`) or
- *  non-numeric value silently becoming `0`, which would disable the limit
- *  rather than leave it at its default; every limit stays at least 1/min. */
-export function perMinuteEnv(name: string, fallback: number): number {
-  const raw = process.env[name]?.trim()
-  if (!raw) return fallback
-  const n = Number(raw)
-  return Number.isFinite(n) ? Math.max(1, Math.floor(n)) : fallback
-}
